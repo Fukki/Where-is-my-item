@@ -6,7 +6,7 @@ Maybe in some character</br>
 Why need to relog and check</br>
 So wasted time lol~~~</br>
 
-![image](https://user-images.githubusercontent.com/26898177/45843457-e3635400-bd49-11e8-98c9-c7151da4b9ef.png)
+![image](https://user-images.githubusercontent.com/26898177/45844064-8c5e7e80-bd4b-11e8-9b3e-9fb4dee17ab3.png)
 
 Command
 - forgot, where, item [name]
