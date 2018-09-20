@@ -7,9 +7,9 @@ Why need to relog all and check
 so wasted time lol~~~
 
 Command
-- forgot, where, item <name>
-- forgot, where, item <itemId>
-- forgot, where, item <itemLink>
+- forgot, where, item [name]
+- forgot, where, item [itemId]
+- forgot, where, item [itemLink]
   
  Something you need to know
 * You can change the command in config.json
