@@ -1,8 +1,7 @@
 {
 	"files": {
 		"README.md": "2fbe6c027103ecd63604aa63f7a44f28add3aca9ded408624f9a7945e996c817",
-		"index.js": "bd4492ed36d0ff5ff5e47bd24dbaca5843a0fd370f0a8227ffdd678899a54e02",
-		"module.json": "aeb717e8ff260b84e7d68839e1699d680c0b531ceb35b09e1e57d1782179d3f8"
+		"index.js": "bd4492ed36d0ff5ff5e47bd24dbaca5843a0fd370f0a8227ffdd678899a54e02"
 	},
 	"defs": {
 		"S_INVEN": 16,
