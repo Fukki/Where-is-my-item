@@ -3,6 +3,6 @@
 	"options": {
 		"niceName": "Fukki"
 	},
-	"servers": ["https://raw.githubusercontent.com/Fukki/Where-is-my-item/master"],
+	"servers": ["https://raw.githubusercontent.com/Fukki/Where-is-my-item/master/"],
 	"supportUrl": "https://github.com/Fukki/Where-is-my-item/issues"
 }
