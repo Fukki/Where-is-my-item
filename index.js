@@ -54,7 +54,7 @@ module.exports = function WhereIsMyItem(mod) {
 				}
 				playerData[playerId][d] = {
 						name: (!itemData[d] ? '(no-data)' : itemData[d].name),
-						amount: itemInv[i].amount
+						amount: (playerData[playerId][d] ? playerData[playerId][d].amount + itemInv[i].amount : itemInv[i].amount)
 				}
 			}
 			getInv = false;
@@ -102,10 +102,7 @@ module.exports = function WhereIsMyItem(mod) {
 	function saveData(s,d) {
 		fs.writeFileSync(path.join(__dirname, 'data\\'+s+'.json'), JSON.stringify(d, null, 2));
 	}
-	
-	function setRegion(d) {
-	}
-	
+
 	function saveConfig() {
 		configFile.region = getRegion(configFile.region);
 		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
