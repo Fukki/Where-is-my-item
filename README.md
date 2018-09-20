@@ -14,9 +14,10 @@ Command
 - forgot, where, item [itemLink]
   
  Something you need to know
-* You can change the command in config.json</br>
-* The config.json will generate after login</br>
-* Data will saved after you relog to character screen</br>
+* You can change the command in config.json
+* The config.json will generate after login
+* Data will saved after you relog to character screen
+* Auto update maybe not work because this is new for me XD
 
 Require
 * request modules
