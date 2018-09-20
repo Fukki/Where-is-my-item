@@ -17,3 +17,8 @@ Command
 * You can change the command in config.json
 * The config.json will generate after login
 * Data will saved after you relog to character screen
+
+Require
+* request modules
+* If you not use caali proxy just download in release tab and put in "node_modules"
+Download: https://github.com/Fukki/Where-is-my-item/releases
