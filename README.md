@@ -3,7 +3,7 @@ This is my original module</br>
 I made this because i alaways forgot my item</br>
 Sometime it's not in the bank</br>
 Maybe in some character</br>
-Why need to relog all and check</br>
+Why need to relog and check</br>
 So wasted time lol~~~</br>
 
 ![image](https://user-images.githubusercontent.com/26898177/45843457-e3635400-bd49-11e8-98c9-c7151da4b9ef.png)
