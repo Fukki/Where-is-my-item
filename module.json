@@ -1,6 +1,7 @@
 {
+
 	"disableAutoUpdate": false,
 	"options": { "niceName": " " },
-	"servers": ["https://raw.githubusercontent.com/Owyn/generic-box-opener-item-user/master/"],
-	"supportUrl": "https://github.com/Owyn/generic-box-opener-item-user/issues"
+	"servers": ["https://raw.githubusercontent.com/Fukki/Where-is-my-item/master"],
+	"supportUrl": "https://github.com/Fukki/Where-is-my-item/issues"
 }
