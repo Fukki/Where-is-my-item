@@ -2,9 +2,9 @@
 This is my original module</br>
 I made this because i alaways forgot my item</br>
 Sometime it's not in the bank</br>
-Maybe in some chracter</br>
+Maybe in some character</br>
 Why need to relog all and check</br>
-so wasted time lol~~~</br>
+So wasted time lol~~~</br>
 
 Command
 - forgot, where, item [name]
