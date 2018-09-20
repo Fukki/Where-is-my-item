@@ -1,6 +1,7 @@
 {
 	"files": {
-		"index.js": "bd4492ed36d0ff5ff5e47bd24dbaca5843a0fd370f0a8227ffdd678899a54e02"
+		"index.js": "bd4492ed36d0ff5ff5e47bd24dbaca5843a0fd370f0a8227ffdd678899a54e02",
+		"manifest.json": "ab6e08adc62e17cca4590d179cc6605dea317662776883fc75884f6440335a7c",
 	},
 	"defs": {
 		"S_INVEN": 16,
