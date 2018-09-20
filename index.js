@@ -54,7 +54,7 @@ module.exports = function WhereIsMyItem(mod) {
 				}
 				playerData[playerId][d] = {
 						name: (!itemData[d] ? '(no-data)' : itemData[d].name),
-						amount: (playerData[playerId][d] ? playerData[playerId][d].amount + itemInv[i].amount : itemInv[i].amount)
+						amount: itemInv[i].amount
 				}
 			}
 			getInv = false;
