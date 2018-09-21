@@ -2,11 +2,12 @@ const request = require('request-promise-native');
 const path = require("path");
 const fs = require("fs");
 module.exports = function WhereIsMyItem(mod) {
-	const cmd = mod.command || mod.require.command;
-	let gameId, serverId, playerId;
+	const cmd = mod.command || mod.require.command
+	const proxyre = mod.region.toLowerCase();
+	let gameId, serverId, playerId, dataFile;
 	let playerData = {}, itemData = {}, configFile = {};
 	let enable, region, consol, operat;
-	let itemUpdate = false, dataLoaded = false, getInv = false;
+	let itemUpdate = false, dataLoaded = false, invUpdate = false;
 	loadConfig();
 	try {
 		itemData = require('./data/itemData.json');
@@ -21,10 +22,12 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	mod.hook("S_LOGIN", 10, (e) => {
 		({gameId, serverId, playerId} = e);
+		dataFile = proxyre+'-'+serverId;
 		itemUpdate = false;
+		invUpdate = false;
 		if (!dataLoaded) {
 			try {
-				playerData = require('./data/'+serverId+'.json');
+				playerData = require('./data/'+dataFile+'.json');
 			} catch(e) { 
 				playerData = {}
 			}
@@ -36,15 +39,15 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	mod.hook("S_RETURN_TO_LOBBY", 'raw', () => {
 		if (enable) {
-			saveData(serverId, playerData);
+			saveData(dataFile, playerData);
 			if (itemUpdate) saveData('itemData', itemData);
 		}
 	});
 	
 	mod.hook('S_INVEN', 16, (e) => {
-		if (enable && !getInv) {
-			getInv = true;
-			let itemInv = e.items, d;
+		if (enable && !invUpdate) {
+			invUpdate = true;
+			let itemInv = e.items, d, a = {};
 			for (i = 0; i < itemInv.length; i++) {
 				d = itemInv[i].id;
 				if (!itemData[d] ||
@@ -52,12 +55,14 @@ module.exports = function WhereIsMyItem(mod) {
 					itemData[d].region != region) {
 					getData(d);
 				}
+				if (!a[d]) a[d] = 0;
+				a[d] += itemInv[i].amount;
 				playerData[playerId][d] = {
 						name: (!itemData[d] ? '(no-data)' : itemData[d].name),
-						amount: itemInv[i].amount
+						amount: a[d]
 				}
 			}
-			getInv = false;
+			invUpdate = false;
 		}
 	});
 	
@@ -114,7 +119,7 @@ module.exports = function WhereIsMyItem(mod) {
 		catch(e) { 
 			configFile = {
 				enable: true,
-				region: getRegion(mod.region),
+				region: getRegion(proxyre),
 				operator: ['forgot', 'where', 'item'],
 				console: false
 			}
