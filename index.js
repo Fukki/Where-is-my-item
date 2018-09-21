@@ -111,11 +111,6 @@ module.exports = function WhereIsMyItem(mod) {
 		fs.writeFileSync(path.join(__dirname, 'data\\'+s+'.json'), JSON.stringify(d, null, 2));
 	}
 
-	function saveConfig() {
-		configFile.region = getRegion(configFile.region);
-		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
-	}
-	
 	function loadConfig() {
 		try {
 			configFile = require('./config.json'); }
@@ -126,10 +121,10 @@ module.exports = function WhereIsMyItem(mod) {
 				operator: ['forgot', 'where', 'item'],
 				console: false
 			}
-			saveConfig();
+			fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
 		}
 		enable = configFile.enable;
-		region = configFile.region;
+		region = getRegion(configFile.region);
 		operat = configFile.operator;
 		consol = configFile.console;
 	}
