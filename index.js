@@ -58,8 +58,8 @@ module.exports = function WhereIsMyItem(mod) {
 				if (!a[d]) a[d] = 0;
 				a[d] += itemInv[i].amount;
 				playerData[playerId][d] = {
-						name: (!itemData[d] ? '(no-data)' : itemData[d].name),
-						amount: a[d]
+					name: (!itemData[d] ? '(no-data)' : itemData[d].name),
+					amount: a[d]
 				}
 			}
 			invUpdate = false;
