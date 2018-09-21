@@ -1,0 +1,10 @@
+{
+	"files": {
+		"index.js": "404cda9be2477bf44cd066a273ff8d8fa5c671242e39b86de93db29b83d2eb38"
+	},
+	"defs": {
+		"S_INVEN": 16,
+		"S_LOGIN": 10,
+		"S_RETURN_TO_LOBBY": "raw"
+	}
+}
