@@ -46,7 +46,8 @@ module.exports = function WhereIsMyItem(mod) {
 			}
 			dataLoaded = true;
 		}
-		if (playerData[playerId]) delete playerData[playerId];
+		if (playerData[playerId])
+			delete playerData[playerId];
 		playerData[playerId] = {owner: e.name}
 	});
 	
