@@ -17,7 +17,6 @@ Command
 * You can change the command in config.json
 * The config.json will generate after login
 * Data will saved after you relog to character screen
-* Auto update maybe not work because this is new for me XD
 
 Require
 * request modules
