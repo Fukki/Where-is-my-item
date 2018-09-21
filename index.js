@@ -6,28 +6,41 @@ module.exports = function WhereIsMyItem(mod) {
 	const proxyre = mod.region.toLowerCase();
 	let gameId, serverId, playerId, dataFile;
 	let playerData = {}, itemData = {}, configFile = {};
-	let enable, region, consol, operat;
 	let itemUpdate = false, dataLoaded = false, invUpdate = false;
-	loadConfig();
+	try {
+		configFile = require('./config.json'); }
+	catch(e) { 
+		configFile = {
+			enable: true,
+			region: getRegion(proxyre),
+			operator: ['forgot', 'where', 'item'],
+			console: false
+		}
+		saveConfig();
+	}
 	try {
 		itemData = require('./data/itemData.json');
 	} catch(e) { 
 		itemData = {}
 	}
+	let enable = configFile.enable,
+		region = getRegion(configFile.region),
+		operat = configFile.operator,
+		consol = configFile.console;
 	
 	cmd.add(operat, (...arg) => {
-		let op = ''; for (n in arg) op = (n > 0 ? op+' '+arg[n]:arg[n]);
-		Search(op);
+		let input = ''; for (n in arg) op = (n > 0 ? op + ' ' + arg[n] : arg[n]);
+		Search(input);
 	});
 	
 	mod.hook("S_LOGIN", 10, (e) => {
 		({gameId, serverId, playerId} = e);
-		dataFile = proxyre+'-'+serverId;
+		dataFile = proxyre + '-' + serverId;
 		itemUpdate = false;
 		invUpdate = false;
 		if (!dataLoaded) {
 			try {
-				playerData = require('./data/'+dataFile+'.json');
+				playerData = require('./data/' + dataFile + '.json');
 			} catch(e) { 
 				playerData = {}
 			}
@@ -80,14 +93,14 @@ module.exports = function WhereIsMyItem(mod) {
 				o = (d > 0 ? playerData[k][d] : playerData[k][s]);
 				if (o) {
 					if (c === 0 && !b) msg(l); c++; b = true;
-					msg('['+c+']: '+o.name+' - ('+o.amount+')');
+					msg('[' + c +']: ' + o.name + ' - (' + o.amount + ')');
 				}
 			} else {
 				for (d in playerData[k]) {
 					o = playerData[k][d];
 					if (o.name && o.name.toLowerCase().search(s.toLowerCase()) >= 0) {
 						if (c === 0 && !b) msg(l); c++; b = true;
-						msg('['+c+']: '+o.name+' - ('+o.amount+')');
+						msg('[' + c + ']: ' + o.name + ' - (' + o.amount + ')');
 					}
 				}
 			}
@@ -110,25 +123,11 @@ module.exports = function WhereIsMyItem(mod) {
 	function saveData(s,d) {
 		fs.writeFileSync(path.join(__dirname, 'data\\'+s+'.json'), JSON.stringify(d, null, 2));
 	}
-
-	function loadConfig() {
-		try {
-			configFile = require('./config.json'); }
-		catch(e) { 
-			configFile = {
-				enable: true,
-				region: getRegion(proxyre),
-				operator: ['forgot', 'where', 'item'],
-				console: false
-			}
-			fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
-		}
-		enable = configFile.enable;
-		region = getRegion(configFile.region);
-		operat = configFile.operator;
-		consol = configFile.console;
-	}
 	
+	function saveConfig() {
+		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
+	}
+
 	function getRegion(d) {
 		switch (d) {
 			case 'us':
