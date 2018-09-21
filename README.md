@@ -1,8 +1,8 @@
 # Where-is-my-item</br>
 This is my original module</br>
-I made this because i alaways forgot my item</br>
+I made this because i always forgot my item</br>
 Sometime it's not in the bank</br>
-Maybe in some character</br>
+Maybe in some character :/</br>
 Why need to relog and check</br>
 So wasted time lol~~~</br>
 
