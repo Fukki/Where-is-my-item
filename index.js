@@ -88,11 +88,11 @@ module.exports = function WhereIsMyItem(mod) {
 					}
 				}
 			}
-			if (c > 0) {
+			c = 0;
+			if (b) {
 				msg('Owner: ' + playerData[k].owner);
 				msg(l);
 			}
-			c = 0;
 		}
 		if (!b) {
 			msg('Connot found: ' + s);
