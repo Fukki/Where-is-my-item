@@ -130,6 +130,7 @@ module.exports = function WhereIsMyItem(mod) {
 	}
 
 	function getRegion(d) {
+		d = d.toLowerCase();
 		switch (d) {
 			case 'us':
 			case 'en':
