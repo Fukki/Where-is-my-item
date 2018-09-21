@@ -5,12 +5,12 @@ module.exports = function WhereIsMyItem(mod) {
 	const cmd = mod.command || mod.require.command
 	const proxyre = mod.region.toLowerCase();
 	let gameId, serverId, playerId, dataFile;
-	let playerData = {}, itemData = {}, configFile = {};
+	let playerData = {}, itemData = {}, configData = {};
 	let itemUpdate = false, dataLoaded = false, invUpdate = false;
 	try {
-		configFile = require('./config.json'); }
+		configData = require('./config.json'); }
 	catch(e) { 
-		configFile = {
+		configData = {
 			enable: true,
 			region: getRegion(proxyre),
 			operator: ['forgot', 'where', 'item'],
@@ -23,10 +23,10 @@ module.exports = function WhereIsMyItem(mod) {
 	} catch(e) { 
 		itemData = {}
 	}
-	let enable = configFile.enable,
-		region = getRegion(configFile.region),
-		operat = configFile.operator,
-		consol = configFile.console;
+	let enable = configData.enable,
+		region = getRegion(configData.region),
+		operat = configData.operator,
+		consol = configData.console;
 	
 	cmd.add(operat, (...arg) => {
 		let input = ''; for (n in arg) input = (n > 0 ? input + ' ' + arg[n] : arg[n]);
@@ -78,7 +78,7 @@ module.exports = function WhereIsMyItem(mod) {
 			}
 			for (d in playerData[playerId])
 				if (playerData[playerId][d].name && !a[d])
-					delete playerData[playerId][d]
+					delete playerData[playerId][d];
 			invUpdate = false;
 		}
 	});
@@ -126,7 +126,7 @@ module.exports = function WhereIsMyItem(mod) {
 	}
 	
 	function saveConfig() {
-		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configFile, null, 2));
+		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configData, null, 2));
 	}
 
 	function getRegion(d) {
