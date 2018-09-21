@@ -29,7 +29,7 @@ module.exports = function WhereIsMyItem(mod) {
 		consol = configFile.console;
 	
 	cmd.add(operat, (...arg) => {
-		let input = ''; for (n in arg) op = (n > 0 ? op + ' ' + arg[n] : arg[n]);
+		let input = ''; for (n in arg) input = (n > 0 ? input + ' ' + arg[n] : arg[n]);
 		Search(input);
 	});
 	
