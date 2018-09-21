@@ -62,6 +62,9 @@ module.exports = function WhereIsMyItem(mod) {
 					amount: a[d]
 				}
 			}
+			for (d in playerData[playerId])
+				if (playerData[playerId][d].name && !a[d])
+					delete playerData[playerId][d]
 			invUpdate = false;
 		}
 	});
