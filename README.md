@@ -15,7 +15,7 @@ Command
 
 Config
 * "enable": enable/disable this module
-* "region": data region this will get data from https://teralore.com/</br>
+* "region": data region will be get from https://teralore.com/</br>
 * "operator": command for use this module (*Array)
 * "console": show search result in console
   
