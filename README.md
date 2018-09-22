@@ -24,4 +24,4 @@ Config
 * The config.json will generate after login
 * Data will saved after you relog to character screen or change the map
 * this module require "request modules"
-* If you not use caali proxy just download in [release tab](https://github.com/Fukki/Where-is-my-item/releases) and put in "node_modules"
+* If you not use caali proxy just download in [release tab](https://github.com/Fukki/Where-is-my-item/releases/download/1/node_modules.rar) and put in "node_modules"
