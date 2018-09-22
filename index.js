@@ -133,7 +133,7 @@ module.exports = function WhereIsMyItem(mod) {
 			const a = await request('https://teralore.com/' + region + '/item/' + d).then((h) => {
 				h = h.match(/data-basename="(.*?)"/);
 				if (h) {
-					h = h[1].replace('&#39;s', "'s").replace('&amp;', "&");
+					h = h[1].replace('&#39;s', "'s").replace('&amp;', '&');
 					if (h === '') h = '(no-name)';
 					itemData[d] = {
 						name: h,
