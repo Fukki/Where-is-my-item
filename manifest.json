@@ -1,10 +1,11 @@
 {
 	"files": {
-		"index.js": "f60147503bbd8ea98588b7efccb5ea1229dbff34e4436b1163fd2321f2477d56"
+		"index.js": "78a10fd33412a5251b6885bd1a0debbec067961df4925f4679a225b84d55b3b7"
 	},
 	"defs": {
 		"S_INVEN": 16,
 		"S_LOGIN": 10,
+		"S_LOAD_TOPO": "raw",
 		"S_RETURN_TO_LOBBY": "raw"
 	}
 }
