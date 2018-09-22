@@ -6,7 +6,7 @@ module.exports = function WhereIsMyItem(mod) {
 	const proxyre = mod.region.toLowerCase();
 	let gameId, serverId, playerId, dataFile;
 	let playerData = {}, itemData = {}, configData = {};
-	let itemUpdate = false, dataLoaded = false, invUpdate = false;
+	let itemUpdate = false, invUpdate = false, dataLoaded = false, getInv = false;
 	try {
 		configData = require('./config.json'); }
 	catch(e) { 
@@ -28,16 +28,12 @@ module.exports = function WhereIsMyItem(mod) {
 		operat = configData.operator,
 		consol = configData.console;
 	
-	cmd.add(operat, (...arg) => {
-		let input = ''; for (n in arg) input = (n > 0 ? input + ' ' + arg[n] : arg[n]);
-		Search(input);
-	});
+	cmd.add(operat, (...arg) => {let input = ''; for (n in arg) input = (n > 0 ? input + ' ' + arg[n] : arg[n]); Search(input);});
 	
 	mod.hook("S_LOGIN", 10, (e) => {
 		({gameId, serverId, playerId} = e);
 		dataFile = proxyre + '-' + serverId;
-		itemUpdate = false;
-		invUpdate = false;
+		itemUpdate = false; invUpdate = false; getInv = false;
 		if (!dataLoaded) {
 			try {
 				playerData = require('./data/' + dataFile + '.json');
@@ -46,49 +42,41 @@ module.exports = function WhereIsMyItem(mod) {
 			}
 			dataLoaded = true;
 		}
-		if (playerData[playerId])
-			delete playerData[playerId];
 		playerData[playerId] = {owner: e.name}
 	});
 	
-	mod.hook("S_RETURN_TO_LOBBY", 'raw', () => {
-		if (enable) {
-			saveData(dataFile, playerData);
-			if (itemUpdate) saveData('itemData', itemData);
-		}
-	});
+	mod.hook("S_RETURN_TO_LOBBY", 'raw', () => {if (enable) updateData();});
+	
+	mod.hook("S_LOAD_TOPO", 'raw', () => {if (enable) updateData();});
 	
 	mod.hook('S_INVEN', 16, (e) => {
-		if (enable && !invUpdate) {
-			invUpdate = true;
-			let itemInv = e.items, d, a = {};
+		if (enable && !getInv) {
+			getInv = true; let itemInv = e.items, d, a = {};
 			for (i = 0; i < itemInv.length; i++) {
 				d = itemInv[i].id;
-				if (!itemData[d] ||
-					itemData[d] === '' ||
-					itemData[d].region != region) {
-					getData(d);
-				}
-				if (!a[d]) a[d] = 0;
-				a[d] += itemInv[i].amount;
+				if (!itemData[d] || itemData[d].region != region) getName(d);
+				if(!playerData[playerId][d]) invUpdate = true;
+				if (!a[d]) a[d] = 0; a[d] += itemInv[i].amount;
 				playerData[playerId][d] = {
 					name: (!itemData[d] ? '(no-data)' : itemData[d].name),
 					amount: a[d]
 				}
 			}
-			for (d in playerData[playerId])
-				if (playerData[playerId][d].name && !a[d])
-					delete playerData[playerId][d];
-			invUpdate = false;
+			for (d in playerData[playerId]) {
+				if (playerData[playerId][d].name && !a[d]) {
+					delete playerData[playerId][d]; invUpdate = true;
+				} else if (playerData[playerId][d].amount != a[d]) {
+					invUpdate = true;
+				}
+			}
+			getInv = false;
 		}
 	});
 	
 	function Search(s) {
 		if (!s || s === '') return;
-		let o, c = 0, b = false;
-		let l = '-------------------------';
-		let d = s.match(/#(\d*)@/);
-		d = d ? Number(d[1]) : 0;
+		let o, c = 0, b = false, l = '-------------------------';
+		let d = s.match(/#(\d*)@/); d = d ? Number(d[1]) : 0;
 		for (k in playerData) {
 			if (d > 0 || Number(s) > 0) {
 				o = (d > 0 ? playerData[k][d] : playerData[k][s]);
@@ -105,28 +93,21 @@ module.exports = function WhereIsMyItem(mod) {
 					}
 				}
 			}
-			if (c > 0) {
-				msg('Owner: ' + playerData[k].owner);
-				msg(l);
-			}
-			c = 0;
+			if (c > 0) {msg('Owner: ' + playerData[k].owner); msg(l);} c = 0;
 		}
-		if (!b) {
-			msg('Connot found: ' + s);
-		}
+		if (!b) msg('Connot found: ' + s);
 	}
 	
-	function msg(s) {
-		cmd.message(s);
-		if (consol) console.log(s);
-	}
+	function msg(s) {cmd.message(s); if (consol) console.log(s);}
 	
-	function saveData(s,d) {
-		fs.writeFileSync(path.join(__dirname, 'data\\'+s+'.json'), JSON.stringify(d, null, 2));
-	}
+	function saveData(s,d) {fs.writeFileSync(path.join(__dirname, 'data\\'+s+'.json'), JSON.stringify(d, null, 2));}
 	
-	function saveConfig() {
-		fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configData, null, 2));
+	function saveConfig() {fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configData, null, 2));}
+	
+	function updateData() {
+		if (invUpdate) saveData(dataFile, playerData);
+		if (itemUpdate) saveData('itemData', itemData);
+		itemUpdate = false; invUpdate = false;
 	}
 
 	function getRegion(d) {
@@ -147,12 +128,12 @@ module.exports = function WhereIsMyItem(mod) {
 		}
 	}
 	
-	async function getData(d) {
+	async function getName(d) {
 		try {
-			const a = await request('https://teralore.com/'+region+'/item/'+d).then((h) => {
+			const a = await request('https://teralore.com/' + region + '/item/' + d).then((h) => {
 				h = h.match(/data-basename="(.*?)"/);
 				if (h) {
-					h = h[1].replace('&#39;s',"'s");
+					h = h[1].replace('&#39;s', "'s");
 					if (h === '') h = '(no-name)';
 					itemData[d] = {
 						name: h,
