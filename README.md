@@ -12,13 +12,17 @@ Command
 - forgot, where, item [name]
 - forgot, where, item [itemId]
 - forgot, where, item [itemLink]
+
+Config
+* "enable": enable/disable this module
+* "region": data region this will get data from https://teralore.com/</br>
+* "operator": command for use this module (*Array)
+* "console": show search result in console
   
  Something you need to know
 * You can change the command in config.json
 * The config.json will generate after login
-* Data will saved after you relog to character screen
-
-Require
-* request modules
+* Data will saved after you relog to character screen or change the map
+* this module require "request modules"
 * If you not use caali proxy just download in release tab and put in "node_modules"
 </br>Download: https://github.com/Fukki/Where-is-my-item/releases
