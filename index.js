@@ -106,9 +106,9 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	function saveConfig() {fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configData, null, 2));}
 	
-	function checkDir() {if (!fs.existsSync(__dirname + '\\data')) fs.mkdirSync(__dirname + '\\data');}
+	function checkData() {if (!fs.existsSync(__dirname + '\\data')) {fs.mkdirSync(__dirname + '\\data'); invUpdate = true; itemUpdate = true;}}
 	
-	function updateData() {checkDir(); if (invUpdate) saveData(dataFile, playerData); invUpdate = false; if (itemUpdate) saveData('itemData', itemData); itemUpdate = false;}
+	function updateData() {checkData(); if (invUpdate) saveData(dataFile, playerData); invUpdate = false; if (itemUpdate) saveData('itemData', itemData); itemUpdate = false;}
 
 	function getRegion(d) {
 		d = d.toLowerCase();
