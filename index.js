@@ -49,6 +49,8 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	mod.hook("S_LOAD_TOPO", 'raw', () => {if (enable) updateData();});
 	
+	mod.hook("S_EXIT", 'raw', () => {if (enable) updateData();});
+	
 	mod.hook('S_INVEN', 16, (e) => {
 		if (enable && !getInv) {
 			getInv = true; let itemInv = e.items, d, a = {};
@@ -104,11 +106,9 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	function saveConfig() {fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(configData, null, 2));}
 	
-	function updateData() {
-		if (invUpdate) saveData(dataFile, playerData);
-		if (itemUpdate) saveData('itemData', itemData);
-		itemUpdate = false; invUpdate = false;
-	}
+	function checkDir() {if (!fs.existsSync(__dirname + '\\data')) fs.mkdirSync(__dirname + '\\data');}
+	
+	function updateData() {checkDir(); if (invUpdate) saveData(dataFile, playerData); invUpdate = false; if (itemUpdate) saveData('itemData', itemData); itemUpdate = false;}
 
 	function getRegion(d) {
 		d = d.toLowerCase();
