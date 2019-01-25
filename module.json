@@ -1,11 +1,11 @@
 {
 	"disableAutoUpdate": false,
-	"name": "Whare is my item",
+	"name": "Where is my item",
 	"author": "Fukki",
 	"description": "Don't forgot your item.",
 	"version": "Kappa :v",
 	"options": {
-		"niceName": "myItem"
+		"niceName": "YayITEM!"
 	},
 	"servers": ["https://raw.githubusercontent.com/Fukki/Where-is-my-item/master/"],
 	"supportUrl": "https://github.com/Fukki/Where-is-my-item/issues/"

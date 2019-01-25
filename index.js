@@ -30,7 +30,7 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	cmd.add(operat, (...arg) => {let input = ''; for (n in arg) input = (n > 0 ? input + ' ' + arg[n] : arg[n]); Search(input);});
 	
-	mod.hook("S_LOGIN", 10, (e) => {
+	mod.hook("S_LOGIN", 12, (e) => {
 		({gameId, serverId, playerId} = e);
 		dataFile = proxyre + '-' + serverId;
 		itemUpdate = false; invUpdate = false; getInv = false;
@@ -51,7 +51,7 @@ module.exports = function WhereIsMyItem(mod) {
 	
 	mod.hook("S_EXIT", 'raw', () => {if (enable) updateData();});
 	
-	mod.hook('S_INVEN', 16, (e) => {
+	mod.hook('S_INVEN', 17, (e) => {
 		if (enable && !getInv) {
 			getInv = true; let itemInv = e.items, d, a = {};
 			for (i = 0; i < itemInv.length; i++) {

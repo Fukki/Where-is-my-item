@@ -1,12 +1,13 @@
 {
 	"files": {
-		"index.js": "d64c277a07edf4ab98c4cd298b985d92f4261df09d677bea6232e8bdaab83873"
+		"index.js": "76aa2293ca1c4fc891134a303af5a40f4534839a3eb02914dde04996af448b3d"
 	},
 	"defs": {
-		"S_INVEN": 16,
-		"S_LOGIN": 10,
+		"S_ANNOUNCE_UPDATE_NOTIFICATION": 1,
 		"S_EXIT": "raw",
+		"S_INVEN": [16,17],
 		"S_LOAD_TOPO": "raw",
+		"S_LOGIN": [10,12],
 		"S_RETURN_TO_LOBBY": "raw"
 	}
 }
